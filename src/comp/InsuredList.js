@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import React, {useState} from 'react';
-import {ActivityIndicator, FlatList, Image, Text, TextInput, View} from 'react-native';
+import {ActivityIndicator, FlatList, Image, TextInput, View} from 'react-native';
 
 import C, {apply} from 'consistencss';
 import {bgColor, colors, deviceHeight, emptyStateURL, fonts, textColor} from '../gStyles';
@@ -17,7 +17,6 @@ import {inject, observer} from 'mobx-react';
 export default inject('inventory')(
   observer(({inventory}) => {
     const [search, setSearch] = useState('');
-    const insuredItems = ['Cartier Ring', 'Necklace', 'Radius', 'Analog digital']; //RootStore.items;
 
     return (
       <View>
@@ -29,21 +28,19 @@ export default inject('inventory')(
             value={search}
             style={apply(C.ml4, fonts.body1, textColor(colors.blueyGrey))}
             placeholderTextColor={colors.blueyGrey}
-            placeholder={'Search ' + insuredItems?.length + ' items'}
+            placeholder={'Search ' + inventory?.objects?.length + ' items'}
           />
         </View>
-        <Text>{JSON.stringify(inventory)}</Text>
 
         {inventory.isLoading ? (
           <ActivityIndicator color={colors.blueyGrey} />
         ) : (
           <FlatList
-            data={insuredItems}
+            data={inventory.objects}
             keyExtractor={(item, index) => index}
             numColumns={2}
             style={apply({maxHeight: deviceHeight * 0.8}, bgColor(colors.paleGreyTwo), C.my4, C.p2)}
             ListEmptyComponent={<Image source={{uri: emptyStateURL}} resizeMode={'contain'} style={apply(C.h80)} />}
-            /*onRefresh={() => fetchTodos()}*/
             refreshing={inventory.isLoading}
             renderItem={(item) => <InsuredItem {...item} />}
           />

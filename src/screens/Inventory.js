@@ -23,7 +23,7 @@ export default inject('inventory')(
           </TouchableOpacity>
         </View>
 
-        {/**Todos List content*/}
+        {/**Insured List content*/}
         <InsuredList />
         <View style={C.mb6} />
         <AddItemModal />

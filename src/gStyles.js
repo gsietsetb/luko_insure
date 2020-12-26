@@ -29,6 +29,15 @@ export const luko = {
 };
 
 export const fonts = {
+  input: {
+    fontFamily: 'Avenir-Roman',
+    fontSize: 16,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 24,
+    letterSpacing: 0,
+    color: colors.blueyGrey,
+  },
   title1: {
     fontFamily: 'Avenir',
     fontSize: 34,

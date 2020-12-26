@@ -30,15 +30,23 @@ const screens = [
   {
     name: 'Inventory',
     icon: 'gem',
-    badge: 3 /*Todo add real number of items*/,
+    badge: inventory?.objects?.length,
   },
   {name: 'Profile', icon: 'user'},
 ];
-const inventory = RootStore.create({objects: [{}], showModal: false}, {});
+const inventory = RootStore.create({
+  objects: [],
+  currentIndex: 0,
+  nextIndex: 0,
+  showModal: false,
+  isLoading: false,
+});
+
 const App: () => React$Node = () => (
   <Provider inventory={inventory}>
     <NavigationContainer>
       <Tab.Navigator
+        initialRouteName={screens[2].name}
         tabBarOptions={{
           activeTintColor: colors.blue,
           inactiveTintColor: colors.blueyGrey,
