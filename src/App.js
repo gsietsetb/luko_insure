@@ -5,21 +5,17 @@
  * @format
  * @flow strict-local
  */
-import React, {useState} from 'react';
-import {
-  Image,
-  LogBox,
-  SafeAreaView,
-  StatusBar,
-  TextInput,
-  View,
-} from 'react-native';
+import React from 'react';
+import {LogBox} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 
-import C, {apply, extend} from 'consistencss';
-import {bgColor, colors, fonts, luko, textColor} from './gStyles';
-import AddItem from './comp/AddItem';
+import {extend} from 'consistencss';
+import {colors} from './gStyles';
+import Inventory from './screens/Inventory';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import InsuredList from './comp/InsuredList';
+import {RootStore} from './store';
+import {Provider} from 'mobx-react';
 
 LogBox.ignoreAllLogs();
 
@@ -27,37 +23,39 @@ extend({
   colors: {...colors},
 });
 
-const App: () => React$Node = () => {
-  const [search, setSearch] = useState('');
-  const insuredItems = [1, '224']; //RootStore.items;
-  return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
-      {/**Header*/}
-      <Image source={luko} resizeMode={'contain'} style={apply(C.h10, C.my4)} />
-      {/**Add List*/}
-      <AddItem />
-      {/**Search*/}
-      <View
-        style={apply(C.row, C.radius2, bgColor(colors.paleGrey), C.p2, C.mx4)}>
-        <Icon
-          name={'search'}
-          onPress={() => {}}
-          size={20}
-          style={apply(textColor(colors.blueyGrey))}
-        />
-        <TextInput
-          onChangeText={(text) => setSearch(text)}
-          value={search}
-          style={apply(C.ml4, fonts.body1, textColor(colors.blueyGrey))}
-          placeholderTextColor={colors.blueyGrey}
-          placeholder={'Search ' + insuredItems?.length + ' items'}
-        />
-      </View>
-      {/**Todos List content*/}
-      <InsuredList />
-      <View style={C.mb6} />
-    </SafeAreaView>
-  );
-};
+const Tab = createBottomTabNavigator();
+const screens = [
+  {name: 'Protection', icon: 'home'},
+  {name: 'Insurance', icon: 'umbrella'},
+  {
+    name: 'Inventory',
+    icon: 'gem',
+    badge: 3 /*Todo add real number of items*/,
+  },
+  {name: 'Profile', icon: 'user'},
+];
+const inventory = RootStore.create({objects: [{}], showModal: false}, {});
+const App: () => React$Node = () => (
+  <Provider inventory={inventory}>
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: colors.blue,
+          inactiveTintColor: colors.blueyGrey,
+        }}>
+        {screens.map(({name, icon, badge}) => (
+          <Tab.Screen
+            name={name}
+            options={{
+              tabBarLabel: name,
+              tabBarBadge: badge,
+              tabBarIcon: (props) => <Icon {...props} size={20} name={icon} />,
+            }}
+            component={Inventory}
+          />
+        ))}
+      </Tab.Navigator>
+    </NavigationContainer>
+  </Provider>
+);
 export default App;

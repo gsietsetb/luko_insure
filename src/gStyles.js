@@ -18,16 +18,14 @@ export const bgColor = (color = colors.blueyGrey) => ({
 export const textColor = (color) => ({
   color: color,
 });
-export const emptyStateURL =
-  'https://orbit.kiwi/files/EmptyState-attempt-at-joke.png';
+export const emptyStateURL = 'https://orbit.kiwi/files/EmptyState-attempt-at-joke.png';
 
 export const topBorder = {
   borderTopRightRadius: 8,
   borderTopLeftRadius: 8,
 };
 export const luko = {
-  uri:
-    'https://s3.amazonaws.com/blab-impact-published-production/siMboFt5mvzYQBWRqeGVydWPCrpNeln4',
+  uri: 'https://s3.amazonaws.com/blab-impact-published-production/siMboFt5mvzYQBWRqeGVydWPCrpNeln4',
 };
 
 export const fonts = {
@@ -38,6 +36,17 @@ export const fonts = {
     fontStyle: 'normal',
     lineHeight: 40,
     letterSpacing: 0,
+    color: colors.black,
+  },
+  subtitle: {
+    width: 91,
+    height: 22,
+    fontFamily: 'Avenir',
+    fontSize: 16,
+    fontWeight: '900',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    textAlign: 'center',
     color: colors.black,
   },
   caption: {

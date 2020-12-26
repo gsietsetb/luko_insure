@@ -23,15 +23,7 @@ export default () => {
     <View style={apply(C.row, C.justifyBetween, C.m4, C.itemsCenter)}>
       <Text style={apply(fonts.title1)}>Inventory</Text>
 
-      <TouchableOpacity
-        style={apply(
-          C.bgBlue,
-          C.radius18,
-          C.w8,
-          C.h8,
-          C.itemsCenter,
-          C.justifyCenter,
-        )}>
+      <TouchableOpacity style={apply(C.bgBlue, C.radius18, C.w8, C.h8, C.itemsCenter, C.justifyCenter)}>
         <Icon
           name="plus"
           onPress={() => {}}
