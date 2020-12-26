@@ -1,7 +1,7 @@
 # Luko React-native Test
 
 by Guillermo Sierra
-![Luko](./src/assets/luko.png =100x20)
+![Luko](./src/assets/Icon-144.png)
 
 ## Inventory creator
 
