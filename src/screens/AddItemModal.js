@@ -67,7 +67,7 @@ const CustomDatePicker = ({val, setVal}) => (
     confirmBtnText="Confirm"
     cancelBtnText="Cancel"
     onDateChange={(date) => {
-      setVal(date);
+      setVal(new Date(date));
     }}
   />
 );
@@ -119,7 +119,12 @@ export default inject('inventory')(
     const [price, setPrice] = useState(0);
 
     const onSave = () => {
-      inventory.addInsuredObject(name, imgURI, Number(price), date, descr, category);
+      const numberPrice = Number(price?.replace(',', '.'));
+      inventory.addInsuredObject(name, imgURI, numberPrice, date, descr, category);
+      setImgURI('');
+      setName('');
+      setCategory(categories[0]);
+      setDate(new Date());
       closeModal();
     };
     return (
@@ -137,7 +142,13 @@ export default inject('inventory')(
         <View>
           <Input label={'Name'} setVal={setName} val={name} />
           <Input label={'Description'} setVal={setDescr} val={descr} />
-          <Input label={'Purchase Value'} keyboardType={'decimal-pad'} setVal={setPrice} val={price} extra="   €   " />
+          <Input
+            label={'Purchase Value'}
+            keyboardType={'decimal-pad'}
+            setVal={(val) => setPrice(val)}
+            val={price}
+            extra="   €   "
+          />
           <Input
             label={'Category'}
             CustomInputType={

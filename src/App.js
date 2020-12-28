@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import React from 'react';
-import {LogBox} from 'react-native';
+import {AsyncStorage, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {extend} from 'consistencss';
@@ -16,6 +16,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {RootStore} from './store';
 import {Provider} from 'mobx-react';
+import {persist} from 'mst-persist';
 
 LogBox.ignoreAllLogs();
 
@@ -41,6 +42,10 @@ const inventory = RootStore.create({
   showModal: false,
   isLoading: false,
 });
+
+persist('inventory', inventory, {
+  storage: AsyncStorage,
+}).then(() => console.log('someStore has been hydrated'));
 
 const App: () => React$Node = () => (
   <Provider inventory={inventory}>

@@ -6,7 +6,7 @@ export const InsuredObject = types
     id: types.number,
     name: types.optional(types.string, 'Empty'),
     category: types.string, //types.union(categories.map((item) => types.literal(item))),
-    date: types.optional(types.string, '2020-12-23'), //types.optional(types.Date, new Date()),
+    date: types.optional(types.Date, new Date()), //types.optional(types.Date, new Date()),
     price: types.optional(types.number, 0.0),
     description: types.optional(types.string, ''),
     photo: types.optional(types.string, 'https://mobx-state-tree.js.org/img/favicon.ico'),
