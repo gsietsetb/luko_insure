@@ -98,7 +98,9 @@ const chooseImage = (setImgURI) => {
 };
 const AddDocument = ({icon = 'camera', text = 'Add photo', uri, setURI}) =>
   uri ? (
-    <Image source={{uri: uri}} style={apply(C.w32, C.h32, C.m4, C.bgBlue, C.radius4)} />
+    <TouchableOpacity onPress={() => chooseImage(setURI)}>
+      <Image source={{uri: uri}} style={apply(C.w32, C.h32, C.m4, C.bgBlue, C.radius4)} />
+    </TouchableOpacity>
   ) : (
     <TouchableOpacity onPress={() => chooseImage(setURI)} style={pickerStyle}>
       <Icon name={icon} size={26} color={colors.blue} />
@@ -123,6 +125,8 @@ export default inject('inventory')(
       inventory.addInsuredObject(name, imgURI, numberPrice, date, descr, category);
       setImgURI('');
       setName('');
+      setDescr('');
+      setPrice(0.0);
       setCategory(categories[0]);
       setDate(new Date());
       closeModal();

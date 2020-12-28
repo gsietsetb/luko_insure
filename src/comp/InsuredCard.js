@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import C, {apply} from 'consistencss';
 import {fonts, topBorder} from '../gStyles';
 
@@ -7,7 +8,7 @@ export default ({item, index}) => {
   const img = {uri: item.photo || 'https://picsum.photos/id/' + (index + 200) + '/200/300'};
   return item ? (
     <View style={apply(C.itemsCenter, C.radius2, C.bgWhite, C.flex, C.m3)}>
-      <Image source={img} resizeMode={'cover'} style={apply({width: '100%'}, C.h40, C.bgRed, C.mb4, topBorder)} />
+      <FastImage source={img} resizeMode={'cover'} style={apply({width: '100%'}, C.h40, C.bgRed, C.mb4, topBorder)} />
       <Text style={apply(fonts.subtitle, C.textStart, C.mx1)}>{item.name}</Text>
       <View style={[C.row, C.justifyBetween, C.flex, C.itemsCenter]}>
         <Text style={apply(fonts.body1, C.textStart, C.mx1)}>{item.description}</Text>
